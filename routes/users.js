@@ -10,11 +10,7 @@ const token = 'xoxb-2297933827824-2280457853732-XWOio2xG6RfQGY4WiPzWpxIQ';
 
 // Initialize
 const web = new WebClient(token);
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-  
-});
+
 router.post('/slack/events',(ctx)=>{
   const body = ctx.request.body;
     const event = body.event;
