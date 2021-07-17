@@ -1,3 +1,4 @@
+import menuList from menu.js;
 var express = require('express');
 var router = express.Router();
 const { WebClient } = require("@slack/web-api");
@@ -16,12 +17,10 @@ router
     if (body.type === "event_callback") {
       console.log(event);
       if (event.type === "message") {
-        if (event.text === "안녕") {
-          console.log(
-            `메시지 수신 channel:${event.channel}, user:${event.user}`
-          );
+        if (event.text === "메뉴추천") {
+          const menuPick = menuList[Math.floor(Math.random() * 100)];
           web.chat
-            .postMessage({ channel: event.channel, text: "안녕하세요 :wink:" })
+            .postMessage({ channel: event.channel, text: `오늘 점심은 ${menuPick} 어떠세요?` })
             .then((result) => {
               console.log("Message sent: " + result.ts);
             });
