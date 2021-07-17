@@ -1,4 +1,4 @@
-export const menuList = [
+const menuList = [
   "감자탕/뼈해장국",
   "순대국",
   "부대찌개",
