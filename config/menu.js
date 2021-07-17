@@ -55,3 +55,4 @@ const menuList = [
   "족발/보쌈",
   "치킨",
 ];
+exports.menuList = menuList;
