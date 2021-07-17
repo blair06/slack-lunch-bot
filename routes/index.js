@@ -33,15 +33,18 @@ router.use(express.json()).post("/", function (req, res, next) {
           });
         res.sendStatus(200);
       } else if (event.text.slice(-2) === "맛집") {
-        const restaurants = crawling.getRestaurants(event.text);
-        web.chat
-          .postMessage({
-            channel: event.channel,
-            text: `====================================\n[오늘의 맛집 ${restaurants[0].title}] \n카테고리: ${restaurants[0].category} \n전화번호: ${restaurants[0].telephone} \n주소: ${restaurants[0].roadAddress} \n관련링크: ${restaurants[0].link}\n====================================`,
-          })
-          .then((result) => {
-            console.log("Message sent: " + result.ts);
-          });
+        const restaurantsObj = crawling.getRestaurants(event.text);
+        restaurantsObj.then((restaurants) => {
+          web.chat
+            .postMessage({
+              channel: event.channel,
+              text: `====================================\n[오늘의 맛집 ${restaurants[0].title}] \n카테고리: ${restaurants[0].category} \n전화번호: ${restaurants[0].telephone} \n주소: ${restaurants[0].roadAddress} \n관련링크: ${restaurants[0].link}\n====================================`,
+            })
+            .then((result) => {
+              console.log("Message sent: " + result.ts);
+            });
+        });
+
         res.sendStatus(200);
       }
     }
