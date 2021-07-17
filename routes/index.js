@@ -1,12 +1,12 @@
 const menuitems = require("../config/menu");
 const crawling = require("../lib/crawling");
-
+const tokenSet = require("../config/key");
 const express = require("express");
 const router = express.Router();
 const { WebClient } = require("@slack/web-api");
 
 // Read a token from the environment variables
-const token = "xoxb-2297933827824-2280457853732-XWOio2xG6RfQGY4WiPzWpxIQ";
+const token = tokenSet.token;
 
 // Initialize
 const web = new WebClient(token);
