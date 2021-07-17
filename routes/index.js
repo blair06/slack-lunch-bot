@@ -38,7 +38,7 @@ router.use(express.json()).post("/", function (req, res, next) {
           web.chat
             .postMessage({
               channel: event.channel,
-              text: `====================================\n[오늘의 맛집 ${restaurants[0].title}] \n카테고리: ${restaurants[0].category} \n전화번호: ${restaurants[0].telephone} \n주소: ${restaurants[0].roadAddress} \n관련링크: ${restaurants[0].link}\n====================================`,
+              text: `====================================\n[오늘의 맛집 ${restaurants.title}] \n카테고리: ${restaurants.category} \n전화번호: ${restaurants.telephone} \n주소: ${restaurants.roadAddress} \n관련링크: ${restaurants.link}\n====================================`,
             })
             .then((result) => {
               console.log("Message sent: " + result.ts);
