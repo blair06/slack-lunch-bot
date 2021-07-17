@@ -1,9 +1,11 @@
 var express = require("express");
 var router = express.Router();
+const crawling = require("../lib/crawling");
 
 /* GET users listing. */
 router.get("/", function (req, res, next) {
-  res.send("respond with a resource");
+  const restaurants = crawling.getRestaurants("노원구 맛집");
+  res.send(restaurants);
 });
 
 module.exports = router;

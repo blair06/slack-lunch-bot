@@ -1,4 +1,6 @@
 const menuitems = require("../config/menu");
+const crawling = require("../lib/crawling");
+
 const express = require("express");
 const router = express.Router();
 const { WebClient } = require("@slack/web-api");
@@ -25,6 +27,17 @@ router.use(express.json()).post("/", function (req, res, next) {
           .postMessage({
             channel: event.channel,
             text: `오늘 메뉴는 ${menuPick} 어떠세요?`,
+          })
+          .then((result) => {
+            console.log("Message sent: " + result.ts);
+          });
+        res.sendStatus(200);
+      } else if (event.text.slice(-2) === "맛집") {
+        const restaurants = crawling.getRestaurants(event.text);
+        web.chat
+          .postMessage({
+            channel: event.channel,
+            text: `====================================\n[오늘의 맛집 ${restaurants[0].title}] \n카테고리: ${restaurants[0].category} \n전화번호: ${restaurants[0].telephone} \n주소: ${restaurants[0].roadAddress} \n관련링크: ${restaurants[0].link}\n====================================`,
           })
           .then((result) => {
             console.log("Message sent: " + result.ts);
