@@ -46,6 +46,15 @@ router.use(express.json()).post("/", function (req, res, next) {
         });
 
         res.sendStatus(200);
+      } else if (event.text === "help") {
+        web.chat
+          .postMessage({
+            channel: event.channel,
+            text: `======================HELP======================\nhelp -> lunchBot에게 적용가능한 명령어를 확인할 수 있습니다.\n메뉴추천 -> 가장 대중적인 메뉴중 한가지를 랜덤으로 골라 추천합니다.\nOOO 맛집 -> OOO에 해당하는 지역의 맛집을 추천합니다.\nTIP! OOO에 적절한 지역명을 넣어 주세요 끝 두자리 맛집 키워드는 필수 입니다 : )\n============================================`,
+          })
+          .then((result) => {
+            console.log("Message sent: " + result.ts);
+          });
       }
     }
   } else if (body.type === "url_verification") {
